@@ -1,0 +1,89 @@
+<!-- Estilo do botão e da página -->
+<style>
+    /* Estilo para o botão */
+    #roleta-button {
+        background-color: #4CAF50; /* Cor de fundo verde */
+        color: white; /* Cor do texto */
+        padding: 15px 30px; /* Espaçamento interno */
+        border: none; /* Sem bordas */
+        border-radius: 8px; /* Bordas arredondadas */
+        font-size: 18px; /* Tamanho da fonte */
+        cursor: pointer; /* Cursor de mão */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        transition: background-color 0.3s, transform 0.3s; /* Transição suave */
+    }
+
+    /* Estilo do botão ao passar o mouse */
+    #roleta-button:hover {
+        background-color: #45a049; /* Mudança de cor no hover */
+        transform: translateY(-2px); /* Efeito de leve elevação */
+    }
+
+    /* Estilo do link secreto (oculto) */
+    #link-secreto {
+        visibility: hidden;
+        position: absolute;
+        left: -9999px;
+    }
+
+    /* Estilo para a mensagem de feedback */
+    #mensagem {
+        font-size: 20px;
+        color: #333;
+        margin-top: 20px;
+        display: none; /* Inicialmente escondida */
+    }
+</style>
+
+<!-- Conteúdo da página -->
+<h1>Bem-vindo à Roleta Russa de Links!</h1>
+<p>Clique no botão abaixo para ser redirecionado a um link surpresa!</p>
+
+<!-- Botão estilizado -->
+<button id="roleta-button">Clique aqui</button>
+
+<!-- Elemento invisível que mostrará o link -->
+<div id="link-secreto"></div>
+
+<!-- Mensagem de feedback ao clicar -->
+<div id="mensagem">Carregando seu destino...</div>
+
+<!-- Script para a funcionalidade da roleta de links -->
+<script>
+    // Lista de links para a roleta
+    var links = [
+        "https://www.link1.com",
+        "https://www.link2.com",
+        "https://www.link3.com",
+        "https://www.link4.com",
+        "https://www.link5.com",
+        "https://www.link6.com",
+        "https://www.link7.com",
+        "https://www.link8.com",
+        "https://www.link9.com",
+        "https://www.link10.com"
+    ];
+
+    // Função para escolher um link aleatório
+    function escolherLinkAleatorio() {
+        var indiceAleatorio = Math.floor(Math.random() * links.length);
+        return links[indiceAleatorio];
+    }
+
+    // Função para redirecionar o botão ao link aleatório
+    document.getElementById("roleta-button").onclick = function() {
+        // Exibir mensagem de carregamento
+        document.getElementById("mensagem").style.display = "block";
+
+        var linkEscolhido = escolherLinkAleatorio();
+
+        // Exibir o link no elemento invisível (só você saberá onde está)
+        document.getElementById("link-secreto").innerText = linkEscolhido;
+
+        // Aguardar um curto período antes de redirecionar, para criar expectativa
+        setTimeout(function() {
+            // Abrir o link em uma nova aba
+            window.open(linkEscolhido, '_blank');
+        }, 1500); // Redirecionar após 1.5 segundos
+    };
+</script>
